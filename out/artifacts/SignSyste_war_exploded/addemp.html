@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+		<style type="text/css">
+			#center{
+				padding: 30px 10px;
+				width: 600px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="center">
+			<form action="AddEmpServlet" method="post" class="form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-lg-2">员工姓名:</label>
+					<div class="col-lg-6">
+						<input type="text" name="emp_name" id="emp_name" placeholder="员工姓名"
+						 class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-2">性别:</label>
+					<div class="col-lg-6">
+						<select name="emp_sex" id="emp_sex" class="form-control">
+							<option value="男">男</option>
+							<option value="女">女</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group"> 
+					<label class="control-label col-lg-2">联系电话:</label>
+					<div class="col-lg-6">
+						<input type="text" name="emp_tel" id="emp_tel"
+						 class="form-control" placeholder="请输入电话号码"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-2">联系邮箱:</label>
+					<div class="col-lg-6">
+						<input type="text" name="emp_email" id="emp_email"
+						 class="form-control" placeholder="请输入邮箱"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-2">直属领导:</label>
+					<div class="col-lg-6">
+						<select name="leader_id" id="leader_id" class="form-control">
+							<option value="0">领导</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group">
+				    <div class="col-sm-offset-2 col-lg-10">
+				      <button type="submit" class="btn btn-primary btn-lg">添加</button>
+				    </div>
+				  </div>
+			</form>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		jQuery(function(){
+			jQuery.post("GetLeadersServlet",function(rst){
+				var leader=document.getElementById("leader_id");
+				for(var i=0;i<rst.length;i++)
+				{
+					var json=rst[i];
+					var op=new Option(json.name,json.id);
+					leader.add(op);
+				}
+			},"json");
+		});
+	</script>
+</html>
